@@ -13,7 +13,11 @@ export class CatalogComponent {
   getFilteredProducts(){
     return this.filter === '' ? this.products :
       this.products.filter((product: any) => this.filter === product.category);
-    }
+  }
+
+  getDiscountClass(product: IProduct){
+    return product.discount > 0 ? 'strikethrough' : '';
+  }
 
   constructor() {
     this.products =[
