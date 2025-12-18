@@ -9,14 +9,16 @@ import { IProduct } from './product.model';
 export class CatalogComponent {
   products: any;
   filter: string = '';
+  cart: IProduct[] = [];
+
+  addToCart(product: IProduct){
+      this.cart.push(product);
+      console.log(`product ${product.name} added to cart`);
+  }
 
   getFilteredProducts(){
     return this.filter === '' ? this.products :
       this.products.filter((product: any) => this.filter === product.category);
-  }
-
-  getDiscountClass(product: IProduct){
-    return product.discount > 0 ? 'strikethrough' : '';
   }
 
   constructor() {
@@ -197,8 +199,6 @@ export class CatalogComponent {
         ];
     }
 
-  getImageUrl(product:IProduct){
-    return '/assets/images/robot-parts/' + product.imageName;
-  }
+
 
 }
