@@ -63,7 +63,8 @@
               "browserTarget": "zak-padel:build:production"
             },
             "development": {
-              "browserTarget": "zak-padel:build:development"
+              "browserTarget": "zak-padel:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"
