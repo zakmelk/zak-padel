@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IProduct } from './product.model';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'pad-catalog',
@@ -9,19 +10,8 @@ import { IProduct } from './product.model';
 export class CatalogComponent {
   products: any;
   filter: string = '';
-  cart: IProduct[] = [];
 
-  addToCart(product: IProduct){
-      this.cart.push(product);
-      console.log(`product ${product.name} added to cart`);
-  }
-
-  getFilteredProducts(){
-    return this.filter === '' ? this.products :
-      this.products.filter((product: any) => this.filter === product.category);
-  }
-
-  constructor() {
+  constructor(private cartSvc: CartService) {
     this.products =[
           {
             id: 1,
@@ -197,7 +187,17 @@ export class CatalogComponent {
             discount: 0,
           },
         ];
-    }
+  }
+
+  addToCart(product: IProduct){
+      this.cartSvc.addToCart(product);
+  }
+
+  getFilteredProducts(){
+    return this.filter === '' ? this.products :
+      this.products.filter((product: any) => this.filter === product.category);
+  }
+    
 
 
 
