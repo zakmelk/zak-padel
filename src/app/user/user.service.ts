@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 
 import { IUser, IUserCredentials } from './user.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ import { IUser, IUserCredentials } from './user.model';
 export class UserService {
   private user: BehaviorSubject<IUser | null>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.user = new BehaviorSubject<IUser | null>(null);
   }
 
@@ -29,5 +30,6 @@ export class UserService {
 
   signOut() {
     this.user.next(null);
+    this.router.navigate(['/sign-in'])
   }
 }
