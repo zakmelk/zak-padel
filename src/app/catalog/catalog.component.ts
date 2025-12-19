@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./catalog.component.css']
 })
 export class CatalogComponent {
-  products: any;
+  products: IProduct[] = [];
   filter: string = '';
 
   constructor(
@@ -25,7 +25,7 @@ export class CatalogComponent {
     this.productSvc.getProducts().subscribe(products => {
       this.products = products;
     });
-    this.route.params.subscribe((params) =>{
+    this.route.queryParams.subscribe((params) =>{
       this.filter = params['filter'] ?? '';
     });
   }
@@ -37,7 +37,7 @@ export class CatalogComponent {
 
   getFilteredProducts(){
     return this.filter === '' ? this.products :
-      this.products.filter((product: any) => this.filter === product.category);
+      this.products.filter((product) => this.filter === product.category);
   }
     
 
